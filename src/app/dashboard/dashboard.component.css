@@ -1,0 +1,21 @@
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid green;
+}
+
+.lable-container {
+  width: 100px;
+  border: 1px solid blue;
+}
+
+.table-container {
+  width: 600px;
+  border: 1px solid violet;
+}
+
+.button-container {
+  width: 100px;
+  border: 1px solid orange;
+}

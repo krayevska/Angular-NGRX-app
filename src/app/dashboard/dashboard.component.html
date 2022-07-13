@@ -1,0 +1,19 @@
+<div class="dashboard-wrapper">
+  <div class="lable-container"><p>dashboard</p></div>
+
+  <div class="table-container">
+    <table>
+      <tr *ngFor="let assessment of userAssessments">
+        <td>{{ assessment.id }}</td>
+        <td>{{ assessment.name }}</td>
+        <td>{{ assessment.active }}</td>
+        <td>{{ assessment.users_resolved }}</td>
+        <td><img src="assessment.image_url" /></td>
+        <td><button (click)="getReport(assessment.id)">Get report</button></td>
+      </tr>
+    </table>
+  </div>
+  <div class="button-container">
+    <button (click)="getAllUsers()">Get All Users</button>
+  </div>
+</div>
