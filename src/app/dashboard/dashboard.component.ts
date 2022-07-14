@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
+import { AuthenticationService } from '../authentication.service';
 import { DataService } from '../data.service';
 import { Assessment } from '../interfaces';
 
@@ -11,7 +13,11 @@ import { Assessment } from '../interfaces';
 export class DashboardComponent implements OnInit {
   public userAssessments: Assessment[];
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private authenticationService: AuthenticationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.dataService.getUserAssessments().subscribe((list) => {
@@ -30,5 +36,10 @@ export class DashboardComponent implements OnInit {
     this.dataService.getAllUsers().subscribe((users) => {
       console.log('USERS ', users);
     });
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }

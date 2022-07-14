@@ -7,12 +7,13 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
+import { User } from './interfaces';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   private AUTH_HEADER = 'X-Token';
-  // private userData = JSON.parse(localStorage.getItem('currentUser'));
-  // private token = this.userData.token;
+  private userData: User;
+  private token: string;
 
   constructor() {}
 
@@ -30,10 +31,10 @@ export class TokenInterceptor implements HttpInterceptor {
     if (request.method === 'POST') {
       return request;
     }
-    let userData = JSON.parse(localStorage.getItem('currentUser'));
-    let token = userData.token;
+    this.userData = JSON.parse(localStorage.getItem('currentUser'));
+    this.token = this.userData.token;
     return request.clone({
-      headers: request.headers.set(this.AUTH_HEADER, token),
+      headers: request.headers.set(this.AUTH_HEADER, this.token),
     });
   }
 }

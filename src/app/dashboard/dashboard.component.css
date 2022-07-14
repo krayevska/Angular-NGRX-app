@@ -22,6 +22,10 @@
   /*border: 1px solid orange;*/
 }
 
+button {
+  width: 100%;
+}
+
 td {
   border: 1px solid black;
 }
