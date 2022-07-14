@@ -3,13 +3,20 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Assessment, Report, User } from './interfaces';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store<{ user: User[] }>
+  ) {
+    this.user$ = store.select('user');
+  }
   private apiUrl = 'https://ds-test-api.herokuapp.com';
+  user$: Observable<User[]>;
 
   getUserAssessments(): Observable<Assessment[]> {
     return this.http.get<Assessment[]>(`${this.apiUrl}/api/userassessments`);

@@ -2,7 +2,57 @@
   border: 1px solid red;
 }
 
-form {
+/* :host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+.form-container {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+}
+
+div.form-container {
+  font-size: 16px;
+}
+
+.hide-button {
+  height: 16px !important;
+  width: 16px !important;
+}
+
+::ng-deep .mat-icon {
+  height: 14px;
+  width: 14px;
+  font-size: 16px;
+}
+
+input.mat-form-field-autofill-control {
+  height: 25px !important;
+}
+
+.login-button {
+  font-size: 16px;
+  width: 150px;
+}
+
+/* .form-container .mat-form-field-appearance-outline .mat-form-field-flex {
+  height: 35px;
+} */
+
+/* mat-form-field.mat-form-field {
+  font-size: 20px;
+  height: 35px;
+} */
+
+/* form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,4 +72,4 @@ button {
 input {
   margin-left: 5px;
   height: 25px;
-}
+} */

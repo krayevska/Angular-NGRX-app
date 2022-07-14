@@ -8,6 +8,8 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
+import { User } from './interfaces';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +17,13 @@ import { AuthenticationService } from './authentication.service';
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
-  ) {}
+    private authenticationService: AuthenticationService,
+    private store: Store<{ user: User[] }>
+  ) {
+    this.user$ = store.select('user');
+  }
+
+  user$: Observable<User[]>;
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -32,7 +39,6 @@ export class AuthGuard implements CanActivate {
     }
     console.log('GUARD redirect to LOGIN');
     this.router.navigate(['/login']);
-    //this.router.navigateByUrl('/login');
     return false;
   }
 }

@@ -8,14 +8,18 @@ import {
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 import { User } from './interfaces';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   private AUTH_HEADER = 'X-Token';
   private userData: User;
   private token: string;
+  user$: Observable<User[]>;
 
-  constructor() {}
+  constructor(private store: Store<{ user: User[] }>) {
+    this.user$ = store.select('user');
+  }
 
   intercept(
     request: HttpRequest<unknown>,

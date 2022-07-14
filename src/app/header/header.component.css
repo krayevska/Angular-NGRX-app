@@ -1,0 +1,21 @@
+.buttons-container {
+  width: 180px;
+  margin: 0 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 30px;
+}
+
+.button-container {
+  width: 150px;
+}
+
+button {
+  width: 100%;
+}
+
+.header-wrapper {
+  background-color: aquamarine;
+  height: 150px;
+}

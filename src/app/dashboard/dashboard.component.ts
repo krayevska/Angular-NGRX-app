@@ -4,6 +4,9 @@ import { takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 import { DataService } from '../data.service';
 import { Assessment } from '../interfaces';
+import { Observable } from 'rxjs';
+import { User } from '../interfaces';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,17 +15,24 @@ import { Assessment } from '../interfaces';
 })
 export class DashboardComponent implements OnInit {
   public userAssessments: Assessment[];
+  user$: Observable<User[]>;
 
   constructor(
     private dataService: DataService,
     private authenticationService: AuthenticationService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private store: Store<{ user: User[] }>
+  ) {
+    this.user$ = store.select('user');
+  }
 
   ngOnInit(): void {
     this.dataService.getUserAssessments().subscribe((list) => {
       console.log('LIST ', list);
       this.userAssessments = list;
+      this.user$.subscribe((user) => {
+        console.log(' USERUSER ', user);
+      });
     });
   }
 

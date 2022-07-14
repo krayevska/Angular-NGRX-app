@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  UntypedFormBuilder,
+  FormBuilder,
   ReactiveFormsModule,
   FormControl,
-  UntypedFormGroup,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { User } from '../interfaces';
 import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,7 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginForm: UntypedFormGroup;
+  loginForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -26,16 +28,16 @@ export class LoginComponent implements OnInit {
   password: AbstractControl;
   hide = true;
 
+  user$: Observable<User[]>;
+
   constructor(
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private store: Store<{ user: User[] }>
   ) {
-    // redirect to home if already logged in
-    // if (this.authenticationService.currentUserValue) {
-    //   this.router.navigate(['/']);
-    // }
+    this.user$ = store.select('user');
   }
 
   ngOnInit() {
@@ -54,6 +56,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log('SUBMIT');
+    console.log('this.form.email.value ', this.form.email.value);
+    console.log('this.form.password.value ', this.form.password.value);
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
