@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Assessment, Report, User } from './interfaces';
 import { Store } from '@ngrx/store';
+import { AdminUser } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class DataService {
     return this.http.get<Report>(url, { params: queryParams });
   }
 
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/api/users`);
+  getAllUsers(): Observable<AdminUser[]> {
+    return this.http.get<AdminUser[]>(`${this.apiUrl}/api/users`);
   }
 }

@@ -16,9 +16,16 @@ import { TokenInterceptor } from './token.interceptor';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './state/user.reducer';
 import { HeaderComponent } from './header/header.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DashboardComponent,
+    HeaderComponent,
+    AdminComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

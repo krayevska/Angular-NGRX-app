@@ -5,6 +5,13 @@ export interface User {
   token: string;
 }
 
+export interface AdminUser {
+  email: string;
+  first_name: string;
+  groups: string[];
+  last_name: string;
+}
+
 export interface Assessment {
   id: number;
   name: string;
