@@ -28,7 +28,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   private addAuthenticationToken(request: HttpRequest<any>): HttpRequest<any> {
     console.log('REQUEST ', request);
-    if (request.method === 'POST') {
+    if (request.url.includes('login')) {
       return request;
     }
     this.userData = JSON.parse(localStorage.getItem('currentUser'));
