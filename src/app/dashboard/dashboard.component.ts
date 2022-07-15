@@ -14,6 +14,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { AppState } from '../state/app.state';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +33,7 @@ import {
 })
 export class DashboardComponent implements OnInit {
   public userAssessments: Assessment[];
-  user$: Observable<User[]>;
+  data$: Observable<User>;
   public displayedColumns: string[] = [
     'id',
     'name',
@@ -49,31 +50,26 @@ export class DashboardComponent implements OnInit {
     private dataService: DataService,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private store: Store<{ user: User[] }>
+    private store: Store<AppState>
   ) {
-    this.user$ = store.select('user');
+    this.data$ = store.select('user');
   }
 
   ngOnInit(): void {
     this.dataService.getUserAssessments().subscribe((list) => {
-      console.log('LIST ', list);
       this.userAssessments = list;
-      this.user$.subscribe((user) => {
-        console.log(' USERUSER ', user);
+      this.data$.subscribe((data) => {
+        console.log(' DATA FROM STORE DASHBOARD ', data);
       });
     });
   }
 
   getReport(id: number): void {
-    this.dataService.getUserAssessmentsReport(id).subscribe((report) => {
-      console.log('REPORT ', report);
-    });
+    this.dataService.getUserAssessmentsReport(id).subscribe((report) => {});
   }
 
   getAllUsers() {
-    this.dataService.getAllUsers().subscribe((users) => {
-      console.log('USERS ', users);
-    });
+    this.dataService.getAllUsers().subscribe((users) => {});
   }
 
   logout() {

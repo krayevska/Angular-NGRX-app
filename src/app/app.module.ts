@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
 import { StoreModule } from '@ngrx/store';
-import { userReducer } from './state/user.reducer';
+import { dataReducer } from './state/user.reducer';
 import { HeaderComponent } from './header/header.component';
 import { AdminComponent } from './admin/admin.component';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { AboutComponent } from './about/about.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,10 @@ import { MatDividerModule } from '@angular/material/divider';
     MatTableModule,
     MatCardModule,
     MatDividerModule,
-    StoreModule.forRoot({ user: userReducer }, {}),
+    StoreModule.forRoot({
+      data: dataReducer,
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 100 }),
   ],
   providers: [
     {

@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Assessment, Report, User } from './interfaces';
 import { Store } from '@ngrx/store';
 import { AdminUser } from './interfaces';
+import { setAllUsers, setAssestments } from './state/user.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,14 @@ export class DataService {
   user$: Observable<User[]>;
 
   getUserAssessments(): Observable<Assessment[]> {
-    return this.http.get<Assessment[]>(`${this.apiUrl}/api/userassessments`);
+    return this.http
+      .get<Assessment[]>(`${this.apiUrl}/api/userassessments`)
+      .pipe(
+        map((assessments) => {
+          this.store.dispatch(setAssestments({ assessments }));
+          return assessments;
+        })
+      );
   }
 
   getUserAssessmentsReport(id: number): Observable<Report> {
@@ -32,6 +40,11 @@ export class DataService {
   }
 
   getAllUsers(): Observable<AdminUser[]> {
-    return this.http.get<AdminUser[]>(`${this.apiUrl}/api/users`);
+    return this.http.get<AdminUser[]>(`${this.apiUrl}/api/users`).pipe(
+      map((adminUsers) => {
+        this.store.dispatch(setAllUsers({ adminUsers }));
+        return adminUsers;
+      })
+    );
   }
 }

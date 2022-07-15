@@ -1,6 +1,7 @@
-import { Assessment, User } from '../interfaces';
+import { AdminUser, Assessment, User } from '../interfaces';
 
 export interface AppState {
   user: User;
-  assessments: Assessment;
+  assessments: Assessment[];
+  adminUsers: AdminUser[];
 }

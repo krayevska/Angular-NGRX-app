@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from '../interfaces';
+import { AdminUser, Assessment, User } from '../interfaces';
 
 export const setCurrentUser = createAction(
   '[Login Component] Set current User',
@@ -8,4 +8,14 @@ export const setCurrentUser = createAction(
 
 export const resetCurrentUser = createAction(
   '[Login Component] Reset Current User'
+);
+
+export const setAssestments = createAction(
+  '[Dashboard Component] Set Assestments',
+  props<{ assessments: Assessment[] }>()
+);
+
+export const setAllUsers = createAction(
+  '[Admin Component] Set All Users',
+  props<{ adminUsers: AdminUser[] }>()
 );

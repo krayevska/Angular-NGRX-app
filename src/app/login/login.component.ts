@@ -13,6 +13,8 @@ import { User } from '../interfaces';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { DataService } from '../data.service';
+import { setAssestments, setCurrentUser } from '../state/user.actions';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +37,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private store: Store<{ user: User[] }>
+    private store: Store<{ user: User[] }>,
+    private dataService: DataService
   ) {
     this.user$ = store.select('user');
   }
@@ -56,9 +59,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('SUBMIT');
-    console.log('this.form.email.value ', this.form.email.value);
-    console.log('this.form.password.value ', this.form.password.value);
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
@@ -69,7 +69,6 @@ export class LoginComponent implements OnInit {
       .pipe(take(1))
       .subscribe(
         (data) => {
-          console.log('DATA ', data);
           this.router.navigate(['']);
         },
         (error) => {
@@ -77,6 +76,17 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+
+  // getAssestments(): void {
+  //   this.dataService.getUserAssessments().subscribe((assessments) => {
+  //     console.log('assessments ', assessments);
+  //     this.store.dispatch(setAssestments({ assessments }));
+  //     this.user$.subscribe(data => {
+  //       console.log("DATADATA ", data)
+  //     })
+  //     this.router.navigate(['']);
+  //   });
+  // }
 
   getErrorMessage(): void {
     console.log('ERROR');

@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {}
 
   goToAdminPanel() {
-    console.log('getAllUsers');
     this.router.navigateByUrl('/admin');
   }
 
