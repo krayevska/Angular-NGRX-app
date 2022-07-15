@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import {
-  setCurrentUser,
+  getCurrentUser,
   resetCurrentUser,
   setAssestments,
-  setAllUsers,
+  getAdminUsersSuccess,
 } from './user.actions';
-import { Assessment, User } from '../interfaces';
+import { Assessment, CurrentUser } from '../interfaces';
 import { AppState } from './app.state';
 import { state } from '@angular/animations';
 
@@ -23,7 +23,7 @@ export const initialState: AppState = {
 
 export const dataReducer = createReducer(
   initialState,
-  on(setCurrentUser, (state, action) => ({
+  on(getCurrentUser, (state, action) => ({
     ...state,
     user: action.user,
   })),
@@ -32,10 +32,12 @@ export const dataReducer = createReducer(
     ...state,
     assessments: action.assessments,
   })),
-  on(setAllUsers, (state, action) => ({
-    ...state,
-    adminUsers: action.adminUsers,
-  }))
+  on(getAdminUsersSuccess, (state, action) => {
+    return {
+      ...state,
+      adminUsers: action.payload,
+    };
+  })
 );
 
 // export const assestmentsReducer = createReducer(

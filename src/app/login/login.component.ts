@@ -9,12 +9,12 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
-import { User } from '../interfaces';
+import { CurrentUser } from '../interfaces';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { DataService } from '../data.service';
-import { setAssestments, setCurrentUser } from '../state/user.actions';
+import { setAssestments, getCurrentUser } from '../state/user.actions';
 
 @Component({
   selector: 'app-login',
@@ -30,14 +30,14 @@ export class LoginComponent implements OnInit {
   password: AbstractControl;
   hide = true;
 
-  user$: Observable<User[]>;
+  user$: Observable<CurrentUser[]>;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private store: Store<{ user: User[] }>,
+    private store: Store<{ user: CurrentUser[] }>,
     private dataService: DataService
   ) {
     this.user$ = store.select('user');

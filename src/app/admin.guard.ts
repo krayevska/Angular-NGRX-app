@@ -9,7 +9,7 @@ import {
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
-import { User } from './interfaces';
+import { CurrentUser } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -20,12 +20,12 @@ export class AdminGuard implements CanActivate {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private store: Store<{ user: User[] }>
+    private store: Store<{ user: CurrentUser[] }>
   ) {
     this.user$ = store.select('user');
   }
 
-  user$: Observable<User[]>;
+  user$: Observable<CurrentUser[]>;
 
   canActivate(
     route: ActivatedRouteSnapshot,

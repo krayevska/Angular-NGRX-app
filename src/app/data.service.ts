@@ -2,10 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Assessment, Report, User } from './interfaces';
+import { Assessment, Report, CurrentUser } from './interfaces';
 import { Store } from '@ngrx/store';
 import { AdminUser } from './interfaces';
-import { setAllUsers, setAssestments } from './state/user.actions';
+import { setAssestments } from './state/user.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +13,12 @@ import { setAllUsers, setAssestments } from './state/user.actions';
 export class DataService {
   constructor(
     private http: HttpClient,
-    private store: Store<{ user: User[] }>
+    private store: Store<{ user: CurrentUser[] }>
   ) {
     this.user$ = store.select('user');
   }
   private apiUrl = 'https://ds-test-api.herokuapp.com';
-  user$: Observable<User[]>;
+  user$: Observable<CurrentUser[]>;
 
   getUserAssessments(): Observable<Assessment[]> {
     return this.http
@@ -40,11 +40,13 @@ export class DataService {
   }
 
   getAllUsers(): Observable<AdminUser[]> {
-    return this.http.get<AdminUser[]>(`${this.apiUrl}/api/users`).pipe(
-      map((adminUsers) => {
-        this.store.dispatch(setAllUsers({ adminUsers }));
-        return adminUsers;
-      })
-    );
+    console.log('getAllUsers!!');
+    return this.http.get<AdminUser[]>(`${this.apiUrl}/api/users`);
+    // .pipe(
+    //   map((adminUsers) => {
+    //     this.store.dispatch(setAllUsers({ adminUsers }));
+    //     return adminUsers;
+    //   })
+    // );
   }
 }

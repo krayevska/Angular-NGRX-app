@@ -5,7 +5,7 @@ import { AuthenticationService } from '../authentication.service';
 import { DataService } from '../data.service';
 import { Assessment } from '../interfaces';
 import { Observable } from 'rxjs';
-import { User } from '../interfaces';
+import { CurrentUser } from '../interfaces';
 import { Store } from '@ngrx/store';
 import {
   animate,
@@ -33,7 +33,7 @@ import { AppState } from '../state/app.state';
 })
 export class DashboardComponent implements OnInit {
   public userAssessments: Assessment[];
-  data$: Observable<User>;
+  data$: Observable<CurrentUser>;
   public displayedColumns: string[] = [
     'id',
     'name',

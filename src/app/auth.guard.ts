@@ -8,7 +8,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
-import { User } from './interfaces';
+import { CurrentUser } from './interfaces';
 import { Store } from '@ngrx/store';
 
 @Injectable({
@@ -18,12 +18,12 @@ export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private store: Store<{ user: User[] }>
+    private store: Store<{ user: CurrentUser[] }>
   ) {
     this.user$ = store.select('user');
   }
 
-  user$: Observable<User[]>;
+  user$: Observable<CurrentUser[]>;
 
   canActivate(
     next: ActivatedRouteSnapshot,
