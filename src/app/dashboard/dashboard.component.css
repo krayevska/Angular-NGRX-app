@@ -54,3 +54,8 @@ tr.example-element-row:not(.example-expanded-row):active {
   overflow: hidden;
   display: flex;
 }
+
+.title {
+  width: 200px;
+  margin: 20px auto;
+}

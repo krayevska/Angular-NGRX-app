@@ -11,6 +11,7 @@ export class AdminComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   public users: AdminUser[];
+  public displayedColumns: string[] = ['first_name', 'last-name', 'email'];
 
   ngOnInit(): void {
     this.dataService.getAllUsers().subscribe((users) => {

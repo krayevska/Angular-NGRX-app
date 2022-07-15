@@ -1,0 +1,85 @@
+<div class="about-wrapper">
+  <mat-card class="about-card">
+    <mat-card-title>Available Routes</mat-card-title>
+    <mat-card-content>
+      <p>Unauthorized - POST /api/login</p>
+      <p>Role User</p>
+      <p>GET /api/userassessments</p>
+      <p>GET /api/userassessment/graph</p>
+      <p>Role Admin GET</p>
+      <p>GET /api/users</p>
+      <p>**cors is allowed for http://localhost:4200</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="about-card">
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+      <p>
+        On the /api/login route you will receive user details including a token.
+      </p>
+      <p>
+        To Authorize your request with the token you received on login, add the
+        X-Token header to any request that should be authorized. The value of
+        the X-Token header is the token value you received on login.
+      </p>
+      <p>
+        Available users are : admin@deepersignals.com and user@deepersignals.com
+      </p>
+      <p>Request: "email":"admin@deepersignals.com", "password":"password"</p>
+      <p>
+        Response: "first_name": "Admin", "last_name": "Deepersignals", "role":
+        "Admin", "token": "QWRtaW5Vc2Vy"
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="about-card">
+    <mat-card-title>Dashboard</mat-card-title>
+    <mat-card-content>
+      <p>
+        When the user is logged in he should be presented with a dashboard where
+        he sees his assessment reports.
+      </p>
+      <p>To get the user reports use the /api/userassessments route.</p>
+      <p>
+        When an admin loges in he should be presented with the same dashboard +
+        a navigation menu, where he can navigate to an admin section.
+      </p>
+      <p>
+        Response: "id": 1, "name": "Core Drivers", "users_resolved": 5,
+        "active": true, "image_url":
+        "https:\/\/d1cuxz3dnd9slg.cloudfront.net\/assessments\/Core+Values+-+Cover+Photo.jpg___2020-05-15-14-13-06.jpg"
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="about-card">
+    <mat-card-title>User Assessment Report</mat-card-title>
+    <mat-card-content>
+      <p>
+        When the user clicks on a assessment report on the dashboard he should
+        be presented with a graph. To get the graph data use:
+        /api/userassessments/graph Add a query id parameter to the request wich
+        is the id of the assessment the user is tring to open.
+      </p>
+      <p>
+        Response: "data": "Agreeableness": 13.333333333333334, "Drive":
+        21.666666666666668, "Luck": 10, "Openess": 30 , "type": "bar"
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="about-card">
+    <mat-card-title>Admin section</mat-card-title>
+    <mat-card-content>
+      <p>
+        The admin should be able to manage his users in this section. So we
+        should present him with a table of users.
+      </p>
+      <p>
+        BONUS: Provide the admin with the functionality to download selected
+        users as csv
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,9 @@
+.about-card {
+  width: 100%;
+  margin: 8px;
+}
+
+.about-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+}

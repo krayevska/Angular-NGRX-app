@@ -3,8 +3,8 @@
   margin: 0 0 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding-top: 30px;
+  gap: 15px;
+  padding: 20px 0;
 }
 
 .button-container {
@@ -17,5 +17,5 @@ button {
 
 .header-wrapper {
   background-color: aquamarine;
-  height: 150px;
+  /* height: 150px; */
 }

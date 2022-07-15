@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 
 @Component({
@@ -9,14 +9,22 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class HeaderComponent implements OnInit {
   public admin = true;
+  public activeRoute: string;
+
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
-  ) {}
+  ) {
+    router.events.forEach((event) => {
+      if (event instanceof NavigationStart) {
+        this.activeRoute = event.url;
+      }
+    });
+  }
 
   ngOnInit(): void {}
 
-  getAllUsers() {
+  goToAdminPanel() {
     console.log('getAllUsers');
     this.router.navigateByUrl('/admin');
   }
@@ -24,5 +32,42 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
+  }
+
+  goToDashboard(): void {
+    this.router.navigate(['']);
+  }
+
+  goToAboutPage(): void {
+    console.log('GO TO ABOUT');
+    this.router.navigate(['/about']);
+  }
+
+  goToLogin(): void {
+    this.router.navigate(['/login']);
+  }
+
+  onHomePage(): boolean {
+    return this.activeRoute === '/';
+  }
+
+  onAdminPage(): boolean {
+    return this.activeRoute === '/admin';
+  }
+
+  notOnLoginPage(): boolean {
+    return this.activeRoute !== '/login';
+  }
+
+  onAboutPage(): boolean {
+    return this.activeRoute === '/about';
+  }
+
+  userLogedIn(): boolean {
+    const currentUser = this.authenticationService.currentUserValue;
+    if (currentUser) {
+      return true;
+    }
+    return false;
   }
 }

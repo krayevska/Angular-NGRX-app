@@ -19,6 +19,9 @@ import { HeaderComponent } from './header/header.component';
 import { AdminComponent } from './admin/admin.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
+import { AboutComponent } from './about/about.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { MatTableModule } from '@angular/material/table';
     DashboardComponent,
     HeaderComponent,
     AdminComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,8 @@ import { MatTableModule } from '@angular/material/table';
     MatButtonModule,
     MatExpansionModule,
     MatTableModule,
+    MatCardModule,
+    MatDividerModule,
     StoreModule.forRoot({ user: userReducer }, {}),
   ],
   providers: [
