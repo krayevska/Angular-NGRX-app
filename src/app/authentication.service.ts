@@ -36,16 +36,13 @@ export class AuthenticationService {
       .pipe(
         map((user: User) => {
           console.log('USER IN SERVICE ', user);
-          this.setUserToStore([user]);
+
+          this.store.dispatch(setCurrentUser({ user }));
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
           return user;
         })
       );
-  }
-
-  setUserToStore(user: User[]) {
-    this.store.dispatch(setCurrentUser({ user }));
   }
 
   logout() {

@@ -1,5 +1,6 @@
-import { User } from '../interfaces';
+import { Assessment, User } from '../interfaces';
 
 export interface AppState {
-  user: ReadonlyArray<User>;
+  user: User;
+  assessments: Assessment;
 }

@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { setCurrentUser, resetCurrentUser } from './user.actions';
 import { User } from '../interfaces';
 
-export const initialState: User[] = [];
+export const initialState: User | null = null;
 
 export const userReducer = createReducer(
   initialState,
@@ -10,5 +10,5 @@ export const userReducer = createReducer(
     console.log('USER FROM REDUSER ', user);
     return user;
   }),
-  on(resetCurrentUser, (state) => [])
+  on(resetCurrentUser, (state) => null)
 );
