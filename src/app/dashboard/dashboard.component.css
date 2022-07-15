@@ -1,25 +1,21 @@
-.dashboard-wrapper {
+/* .dashboard-wrapper {
   display: flex;
   flex-direction: column;
-  /*justify-content: center;*/
+
   align-items: center;
-  /* border: 1px solid green; */
 }
 
 .lable-container {
   width: 100px;
-  /* border: 1px solid blue; */
 }
 
 .table-container {
   width: 350px;
-  /* border: 1px solid violet; */
 }
 
 .button-container {
   width: 100px;
   margin-top: 10px;
-  /*border: 1px solid orange;*/
 }
 
 button {
@@ -28,4 +24,33 @@ button {
 
 td {
   border: 1px solid black;
+} */
+
+/* table {
+  width: 100%;
+} */
+
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
 }

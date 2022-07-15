@@ -17,6 +17,8 @@ import { StoreModule } from '@ngrx/store';
 import { userReducer } from './state/user.reducer';
 import { HeaderComponent } from './header/header.component';
 import { AdminComponent } from './admin/admin.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { AdminComponent } from './admin/admin.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatExpansionModule,
+    MatTableModule,
     StoreModule.forRoot({ user: userReducer }, {}),
   ],
   providers: [
