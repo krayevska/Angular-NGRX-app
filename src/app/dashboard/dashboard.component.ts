@@ -16,6 +16,7 @@ import {
 } from '@angular/animations';
 import { AppState } from '../state/app.state';
 import { assessmentsSelector } from '../state/selectors';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-dashboard',
