@@ -39,3 +39,8 @@ export interface CustomAction extends Action {
     password: any;
   };
 }
+
+export interface ReportAction extends Action {
+  type: string;
+  payload: number;
+}

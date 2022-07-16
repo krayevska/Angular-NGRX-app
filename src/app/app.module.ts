@@ -26,6 +26,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import {
   CurrentUserEffect,
+  ReportEffect,
   UserAssestmentsEffect,
   UsersEffect,
 } from './state/user.effects';
@@ -61,6 +62,7 @@ import {
       UsersEffect,
       UserAssestmentsEffect,
       CurrentUserEffect,
+      ReportEffect,
     ]),
   ],
   providers: [

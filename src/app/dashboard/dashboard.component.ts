@@ -63,7 +63,13 @@ export class DashboardComponent implements OnInit {
   }
 
   getReport(id: number): void {
-    this.dataService.getUserAssessmentsReport(id).subscribe((report) => {});
+    console.log('GET REPORT ', id);
+    this.store.dispatch({
+      type: '[Dashboard Component] Get Assestment Report',
+      payload: { id },
+    });
+
+    //this.dataService.getUserAssessmentsReport(id).subscribe((report) => {});
   }
 
   getAllUsers() {

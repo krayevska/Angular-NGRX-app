@@ -5,7 +5,7 @@ import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 import { DataService } from '../data.service';
-import { CustomAction } from '../interfaces';
+import { CustomAction, ReportAction } from '../interfaces';
 import { LocalStorageService } from '../local-storage.service';
 
 @Injectable()
@@ -73,6 +73,28 @@ export class UserAssestmentsEffect {
           catchError(() => EMPTY)
         )
       )
+    )
+  );
+}
+
+@Injectable()
+export class ReportEffect {
+  constructor(private actions$: Actions, private dataService: DataService) {}
+
+  loadReport$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType('[Dashboard Component] Get Assestment Report'),
+      switchMap((action: ReportAction) => {
+        return this.dataService.getUserAssessmentsReport(action.payload).pipe(
+          map((report) => {
+            return {
+              type: '[Dashboard Component] Get Assestment Report Success',
+              payload: report,
+            };
+          }),
+          catchError(() => EMPTY)
+        );
+      })
     )
   );
 }

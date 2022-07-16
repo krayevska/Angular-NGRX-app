@@ -18,9 +18,10 @@ export class DataService {
     return this.http.get<Assessment[]>(`${this.apiUrl}/api/userassessments`);
   }
 
-  getUserAssessmentsReport(id: number): Observable<Report> {
+  getUserAssessmentsReport(idObject: any): Observable<Report> {
     let queryParams = new HttpParams();
-    queryParams = queryParams.append('id', id.toString());
+    queryParams = queryParams.append('id', idObject.id);
+
     let url = `${this.apiUrl}/api/userassessment/graph`;
 
     return this.http.get<Report>(url, { params: queryParams });

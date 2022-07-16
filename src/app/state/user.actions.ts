@@ -1,10 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { AdminUser, Assessment, CurrentUser } from '../interfaces';
+import { AdminUser, Assessment, CurrentUser, Report } from '../interfaces';
 
-// export const getCurrentUser = createAction(
-//   '[Login Component] Set current User',
-//   props<{ user: CurrentUser }>()
-// );
 export const getCurrentUser = createAction(
   '[Login Component] Get current User',
   props<{ email: string; password: string }>()
@@ -19,10 +15,15 @@ export const resetCurrentUser = createAction(
   '[Login Component] Reset Current User'
 );
 
-// export const setAssestments = createAction(
-//   '[Dashboard Component] Set Assestments',
-//   props<{ assessments: Assessment[] }>()
-// );
+export const getAssestmentReport = createAction(
+  '[Dashboard Component] Get Assestment Report',
+  props<{ payload: number }>()
+);
+
+export const getAssestmentReportSuccess = createAction(
+  '[Dashboard Component] Get Assestment Report Success',
+  props<{ payload: Report }>()
+);
 
 export const setAssestments = createAction(
   '[Dashboard Component] Set Assestments'

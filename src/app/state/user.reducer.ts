@@ -6,6 +6,7 @@ import {
   getAdminUsersSuccess,
   setAssestmentsSuccess,
   getCurrentUserSuccess,
+  getAssestmentReportSuccess,
 } from './user.actions';
 import { Assessment, CurrentUser } from '../interfaces';
 import { AppState } from './app.state';
@@ -21,6 +22,7 @@ export const initialState: AppState = {
   currentUser: null,
   assessments: null,
   users: null,
+  report: null,
 };
 
 export const dataReducer = createReducer(
@@ -29,12 +31,13 @@ export const dataReducer = createReducer(
     ...state,
     currentUser: action.payload,
   })),
-  //on(resetCurrentUser, (state) => null),
+
   on(resetCurrentUser, (state) => {
     return {
       currentUser: null,
       assessments: null,
       users: null,
+      report: null,
     };
   }),
   on(setAssestmentsSuccess, (state, action) => ({
@@ -46,21 +49,12 @@ export const dataReducer = createReducer(
       ...state,
       users: action.payload,
     };
+  }),
+
+  on(getAssestmentReportSuccess, (state, action) => {
+    return {
+      ...state,
+      report: action.payload,
+    };
   })
 );
-
-// export const assestmentsReducer = createReducer(
-//   initialState,
-//   on(setAssestments, (state, action) => ({
-//     ...state,
-//     assessments: action.assessments,
-//   }))
-// );
-
-// export const adminUsersReducer = createReducer(
-//   initialState,
-//   on(setAllUsers, (state, action) => ({
-//     ...state,
-//     adminUsers: action.adminUsers,
-//   }))
-// );

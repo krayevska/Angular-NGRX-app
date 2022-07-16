@@ -58,7 +58,8 @@
         aria-label="expand row"
         (click)="
           expandedElement = expandedElement === assessment ? null : assessment;
-          $event.stopPropagation()
+          $event.stopPropagation();
+          getReport(assessment.id)
         "
       >
         <mat-icon *ngIf="expandedElement !== assessment"
@@ -96,7 +97,8 @@
     class="example-element-row"
     [class.example-expanded-row]="expandedElement === assessment"
     (click)="
-      expandedElement = expandedElement === assessment ? null : assessment
+      expandedElement = expandedElement === assessment ? null : assessment;
+      getReport(assessment.id)
     "
   ></tr>
   <tr
