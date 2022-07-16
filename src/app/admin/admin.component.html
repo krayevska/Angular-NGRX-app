@@ -1,13 +1,4 @@
 <p class="title">USERS LIST</p>
-<!-- <div class="admin-table-wrapper">
-  <table>
-    <tr *ngFor="let user of users">
-      <td>{{ user.first_name }}</td>
-      <td>{{ user.last_name }}</td>
-      <td>{{ user.email }}</td>
-    </tr>
-  </table>
-</div> -->
 
 <table mat-table [dataSource]="users" class="mat-elevation-z8">
   <ng-container matColumnDef="first_name">

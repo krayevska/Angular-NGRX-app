@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { AuthenticationService } from '../authentication.service';
+import { CurrentUser } from '../interfaces';
+import { LocalStorageService } from '../local-storage.service';
+import { AppState } from '../state/app.state';
 
 @Component({
   selector: 'app-header',
@@ -10,10 +14,13 @@ import { AuthenticationService } from '../authentication.service';
 export class HeaderComponent implements OnInit {
   public admin = true;
   public activeRoute: string;
+  public currentUser = this.localStorageService.getCurrentUser();
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private localStorageService: LocalStorageService,
+    private store: Store<AppState>
   ) {
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
@@ -29,7 +36,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authenticationService.logout();
+    this.currentUser = null;
+    this.localStorageService.clearLocalStorage();
+    this.store.dispatch({ type: '[Login Component] Reset Current User' });
     this.router.navigate(['/login']);
   }
 
@@ -38,7 +47,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goToAboutPage(): void {
-    console.log('GO TO ABOUT');
     this.router.navigate(['/about']);
   }
 
@@ -54,6 +62,10 @@ export class HeaderComponent implements OnInit {
     return this.activeRoute === '/admin';
   }
 
+  isAdmin(): boolean {
+    return this.currentUser.role === 'Admin';
+  }
+
   notOnLoginPage(): boolean {
     return this.activeRoute !== '/login';
   }
@@ -63,8 +75,8 @@ export class HeaderComponent implements OnInit {
   }
 
   userLogedIn(): boolean {
-    const currentUser = this.authenticationService.currentUserValue;
-    if (currentUser) {
+    this.currentUser = this.localStorageService.getCurrentUser();
+    if (this.currentUser) {
       return true;
     }
     return false;

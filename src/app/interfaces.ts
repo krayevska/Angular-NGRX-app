@@ -1,3 +1,5 @@
+import { Action } from '@ngrx/store';
+
 export interface CurrentUser {
   first_name: string;
   last_name: string;
@@ -28,4 +30,12 @@ export interface Report {
     Openess: number;
   };
   type: string;
+}
+
+export interface CustomAction extends Action {
+  type: string;
+  payload: {
+    email: any;
+    password: any;
+  };
 }

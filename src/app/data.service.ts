@@ -11,24 +11,11 @@ import { setAssestments } from './state/user.actions';
   providedIn: 'root',
 })
 export class DataService {
-  constructor(
-    private http: HttpClient,
-    private store: Store<{ user: CurrentUser[] }>
-  ) {
-    this.user$ = store.select('user');
-  }
+  constructor(private http: HttpClient) {}
   private apiUrl = 'https://ds-test-api.herokuapp.com';
-  user$: Observable<CurrentUser[]>;
 
   getUserAssessments(): Observable<Assessment[]> {
-    return this.http
-      .get<Assessment[]>(`${this.apiUrl}/api/userassessments`)
-      .pipe(
-        map((assessments) => {
-          this.store.dispatch(setAssestments({ assessments }));
-          return assessments;
-        })
-      );
+    return this.http.get<Assessment[]>(`${this.apiUrl}/api/userassessments`);
   }
 
   getUserAssessmentsReport(id: number): Observable<Report> {
@@ -40,13 +27,6 @@ export class DataService {
   }
 
   getAllUsers(): Observable<AdminUser[]> {
-    console.log('getAllUsers!!');
     return this.http.get<AdminUser[]>(`${this.apiUrl}/api/users`);
-    // .pipe(
-    //   map((adminUsers) => {
-    //     this.store.dispatch(setAllUsers({ adminUsers }));
-    //     return adminUsers;
-    //   })
-    // );
   }
 }

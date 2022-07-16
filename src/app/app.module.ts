@@ -24,7 +24,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { UsersEffect } from './state/user.effects';
+import {
+  CurrentUserEffect,
+  UserAssestmentsEffect,
+  UsersEffect,
+} from './state/user.effects';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { UsersEffect } from './state/user.effects';
       data: dataReducer,
     }),
     StoreDevtoolsModule.instrument({ maxAge: 100 }),
-    EffectsModule.forRoot([UsersEffect]),
+    EffectsModule.forRoot([
+      UsersEffect,
+      UserAssestmentsEffect,
+      CurrentUserEffect,
+    ]),
   ],
   providers: [
     {

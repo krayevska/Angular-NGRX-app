@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { DataService } from '../data.service';
-import { AdminUser, CurrentUser } from '../interfaces';
+import { select, Store } from '@ngrx/store';
+import { AdminUser } from '../interfaces';
 import { AppState } from '../state/app.state';
+import { usersSelector } from '../state/selectors';
 
 @Component({
   selector: 'app-admin',
@@ -12,23 +11,14 @@ import { AppState } from '../state/app.state';
 })
 export class AdminComponent implements OnInit {
   users: AdminUser[];
-  adminUsers$: Observable<AdminUser[]> = this.store.select(
-    (state) => state.adminUsers
-  );
 
-  constructor(
-    private dataService: DataService,
-    private store: Store<{ adminUsers: AdminUser[] }>
-  ) {
-    //this.data$ = store.select('user');
-  }
+  constructor(private store: Store<AppState>) {}
 
   public displayedColumns: string[] = ['first_name', 'last-name', 'email'];
 
   ngOnInit(): void {
     this.store.dispatch({ type: '[Admin Page] Get Admin users' });
-    this.adminUsers$.subscribe((users) => {
-      console.log('USERS ', users);
+    this.store.pipe(select(usersSelector)).subscribe((users: any) => {
       this.users = users;
     });
   }

@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 import { CurrentUser } from './interfaces';
 import { Store } from '@ngrx/store';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
+    private localStorageService: LocalStorageService,
     private store: Store<{ user: CurrentUser[] }>
   ) {
     this.user$ = store.select('user');
@@ -33,11 +35,10 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const currentUser = this.authenticationService.currentUserValue;
+    const currentUser = this.localStorageService.getCurrentUser();
     if (currentUser) {
       return true;
     }
-    console.log('GUARD redirect to LOGIN');
     this.router.navigate(['/login']);
     return false;
   }

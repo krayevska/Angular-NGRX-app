@@ -6,7 +6,7 @@ import { DataService } from '../data.service';
 import { Assessment } from '../interfaces';
 import { Observable } from 'rxjs';
 import { CurrentUser } from '../interfaces';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import {
   animate,
   state,
@@ -15,6 +15,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { AppState } from '../state/app.state';
+import { assessmentsSelector } from '../state/selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -48,19 +49,16 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private authenticationService: AuthenticationService,
-    private router: Router,
     private store: Store<AppState>
-  ) {
-    this.data$ = store.select('user');
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.dataService.getUserAssessments().subscribe((list) => {
-      this.userAssessments = list;
-      this.data$.subscribe((data) => {
-        console.log(' DATA FROM STORE DASHBOARD ', data);
-      });
+    this.store.dispatch({
+      type: '[Dashboard Component] Set Assestments',
+    });
+
+    this.store.pipe(select(assessmentsSelector)).subscribe((assessments) => {
+      this.userAssessments = assessments;
     });
   }
 
@@ -70,10 +68,5 @@ export class DashboardComponent implements OnInit {
 
   getAllUsers() {
     this.dataService.getAllUsers().subscribe((users) => {});
-  }
-
-  logout() {
-    this.authenticationService.logout();
-    this.router.navigate(['/login']);
   }
 }

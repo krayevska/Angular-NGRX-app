@@ -15,6 +15,8 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { DataService } from '../data.service';
 import { setAssestments, getCurrentUser } from '../state/user.actions';
+import { currentUserSelector } from '../state/selectors';
+import { AppState } from '../state/app.state';
 
 @Component({
   selector: 'app-login',
@@ -25,26 +27,17 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
-  returnUrl: string;
   email: AbstractControl;
   password: AbstractControl;
   hide = true;
 
-  user$: Observable<CurrentUser[]>;
-
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private store: Store<{ user: CurrentUser[] }>,
-    private dataService: DataService
-  ) {
-    this.user$ = store.select('user');
-  }
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit() {
-    console.log('ON INIT LOGIN');
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -52,6 +45,12 @@ export class LoginComponent implements OnInit {
 
     this.email = this.loginForm.get('email');
     this.password = this.loginForm.get('password');
+
+    this.store.select(currentUserSelector).subscribe((user) => {
+      if (user) {
+        this.router.navigate(['']);
+      }
+    });
   }
 
   get form() {
@@ -59,36 +58,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    let email = this.form.email.value;
+    let password = this.form.password.value;
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
     }
     this.loading = true;
-    this.authenticationService
-      .login(this.form.email.value, this.form.password.value)
-      .pipe(take(1))
-      .subscribe(
-        (data) => {
-          this.router.navigate(['']);
-        },
-        (error) => {
-          console.log('ERROR ', error.message);
-        }
-      );
-  }
 
-  // getAssestments(): void {
-  //   this.dataService.getUserAssessments().subscribe((assessments) => {
-  //     console.log('assessments ', assessments);
-  //     this.store.dispatch(setAssestments({ assessments }));
-  //     this.user$.subscribe(data => {
-  //       console.log("DATADATA ", data)
-  //     })
-  //     this.router.navigate(['']);
-  //   });
-  // }
-
-  getErrorMessage(): void {
-    console.log('ERROR');
+    this.store.dispatch({
+      type: '[Login Component] Get current User',
+      payload: { email, password },
+    });
   }
 }

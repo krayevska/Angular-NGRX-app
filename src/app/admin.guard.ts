@@ -10,22 +10,19 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 import { CurrentUser } from './interfaces';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminGuard implements CanActivate {
-  private admin = true;
+  private currentUser = this.localStorageService.getCurrentUser();
+  private role = this.currentUser.role;
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private store: Store<{ user: CurrentUser[] }>
-  ) {
-    this.user$ = store.select('user');
-  }
-
-  user$: Observable<CurrentUser[]>;
+    private localStorageService: LocalStorageService
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -35,12 +32,9 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log('ADMIN GUARD');
-    if (this.admin) {
-      console.log('ADMIN');
+    if (this.role === 'Admin') {
       return true;
     }
-
     this.router.navigate(['']);
     return false;
   }

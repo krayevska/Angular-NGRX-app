@@ -1,7 +1,7 @@
 import { AdminUser, Assessment, CurrentUser } from '../interfaces';
 
 export interface AppState {
-  user: CurrentUser;
+  currentUser: CurrentUser;
   assessments: Assessment[];
-  adminUsers: AdminUser[];
+  users: AdminUser[];
 }

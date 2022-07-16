@@ -4,6 +4,8 @@ import {
   resetCurrentUser,
   setAssestments,
   getAdminUsersSuccess,
+  setAssestmentsSuccess,
+  getCurrentUserSuccess,
 } from './user.actions';
 import { Assessment, CurrentUser } from '../interfaces';
 import { AppState } from './app.state';
@@ -16,26 +18,33 @@ import { state } from '@angular/animations';
 // }
 
 export const initialState: AppState = {
-  user: null,
+  currentUser: null,
   assessments: null,
-  adminUsers: null,
+  users: null,
 };
 
 export const dataReducer = createReducer(
   initialState,
-  on(getCurrentUser, (state, action) => ({
+  on(getCurrentUserSuccess, (state, action) => ({
     ...state,
-    user: action.user,
+    currentUser: action.payload,
   })),
-  on(resetCurrentUser, (state) => null),
-  on(setAssestments, (state, action) => ({
+  //on(resetCurrentUser, (state) => null),
+  on(resetCurrentUser, (state) => {
+    return {
+      currentUser: null,
+      assessments: null,
+      users: null,
+    };
+  }),
+  on(setAssestmentsSuccess, (state, action) => ({
     ...state,
-    assessments: action.assessments,
+    assessments: action.payload,
   })),
   on(getAdminUsersSuccess, (state, action) => {
     return {
       ...state,
-      adminUsers: action.payload,
+      users: action.payload,
     };
   })
 );
