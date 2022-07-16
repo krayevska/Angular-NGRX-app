@@ -30,6 +30,8 @@ import {
   UserAssestmentsEffect,
   UsersEffect,
 } from './state/user.effects';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import {
     MatTableModule,
     MatCardModule,
     MatDividerModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
     StoreModule.forRoot({
       data: dataReducer,
     }),

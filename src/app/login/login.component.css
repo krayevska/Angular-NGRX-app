@@ -17,3 +17,8 @@ mat-form-field {
 button {
   width: 100%;
 }
+
+.loader-wrap {
+  width: 50px;
+  margin: 10px auto;
+}

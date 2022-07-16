@@ -23,13 +23,20 @@ export const initialState: AppState = {
   assessments: null,
   users: null,
   report: null,
+  loading: null,
 };
 
 export const dataReducer = createReducer(
   initialState,
+
+  on(getCurrentUser, (state, action) => ({
+    ...state,
+    loading: true,
+  })),
   on(getCurrentUserSuccess, (state, action) => ({
     ...state,
     currentUser: action.payload,
+    loading: null,
   })),
 
   on(resetCurrentUser, (state) => {
@@ -38,6 +45,7 @@ export const dataReducer = createReducer(
       assessments: null,
       users: null,
       report: null,
+      loading: null,
     };
   }),
   on(setAssestmentsSuccess, (state, action) => ({

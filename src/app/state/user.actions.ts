@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { AdminUser, Assessment, CurrentUser, Report } from '../interfaces';
+import { User, Assessment, CurrentUser, Report } from '../interfaces';
 
 export const getCurrentUser = createAction(
   '[Login Component] Get current User',
@@ -38,5 +38,5 @@ export const getAdminUsers = createAction('[Admin Page] Get Admin users');
 
 export const getAdminUsersSuccess = createAction(
   '[Admin Page] Get Admin users Success',
-  props<{ payload: AdminUser[] }>()
+  props<{ payload: User[] }>()
 );

@@ -56,6 +56,7 @@
   <button mat-raised-button (click)="onSubmit()" class="login-button">
     Login
   </button>
+  <div *ngIf="loading" class="loader-wrap">
+    <mat-progress-bar mode="buffer"></mat-progress-bar>
+  </div>
 </div>
-
-<!-- </div> -->

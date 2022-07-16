@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { Assessment, CurrentUser } from '../interfaces';
+import { Assessment, CurrentUser, Report, User } from '../interfaces';
 import { AppState } from './app.state';
 
 export function getState(state: any): AppState {
@@ -14,10 +14,20 @@ export function fetchAssestments(state: any): Assessment[] {
   return state.assessments;
 }
 
-export function fetchUsers(state: any): CurrentUser {
+export function fetchUsers(state: any): User[] {
   return state.users;
+}
+
+export function fetchReport(state: any): Report {
+  return state.report;
+}
+
+export function fetchLoading(state: any): boolean {
+  return state.loading;
 }
 
 export const currentUserSelector = createSelector(getState, fetchCurrentUser);
 export const assessmentsSelector = createSelector(getState, fetchAssestments);
 export const usersSelector = createSelector(getState, fetchUsers);
+export const assessmentReportSelector = createSelector(getState, fetchReport);
+export const loadingtSelector = createSelector(getState, fetchLoading);

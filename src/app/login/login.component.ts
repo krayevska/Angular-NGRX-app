@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { DataService } from '../data.service';
 import { setAssestments, getCurrentUser } from '../state/user.actions';
-import { currentUserSelector } from '../state/selectors';
+import { currentUserSelector, loadingtSelector } from '../state/selectors';
 import { AppState } from '../state/app.state';
 
 @Component({
@@ -25,7 +25,7 @@ import { AppState } from '../state/app.state';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loading = false;
+  loading: boolean;
   submitted = false;
   email: AbstractControl;
   password: AbstractControl;
@@ -51,6 +51,10 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['']);
       }
     });
+
+    this.store.select(loadingtSelector).subscribe((loading) => {
+      this.loading = loading;
+    });
   }
 
   get form() {
@@ -64,7 +68,6 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.loading = true;
 
     this.store.dispatch({
       type: '[Login Component] Get current User',

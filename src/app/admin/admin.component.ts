@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { AdminUser } from '../interfaces';
+import { User } from '../interfaces';
 import { AppState } from '../state/app.state';
 import { usersSelector } from '../state/selectors';
 
@@ -10,7 +10,7 @@ import { usersSelector } from '../state/selectors';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  users: AdminUser[];
+  users: User[];
 
   constructor(private store: Store<AppState>) {}
 

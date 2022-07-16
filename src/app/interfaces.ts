@@ -7,7 +7,7 @@ export interface CurrentUser {
   token: string;
 }
 
-export interface AdminUser {
+export interface User {
   email: string;
   first_name: string;
   groups: string[];
