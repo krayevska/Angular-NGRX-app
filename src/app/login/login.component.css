@@ -3,8 +3,8 @@
 }
 
 .error-wrapper {
-  width: 150px;
-  margin: 5px auto;
+  width: 200px;
+  margin: 5px auto 10px auto;
   color: red;
   text-align: center;
 }
@@ -19,6 +19,7 @@
 
 mat-form-field {
   display: block;
+  margin: 5px 0;
 }
 
 button {

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthenticationService } from '../authentication.service';
-import { CurrentUser } from '../interfaces';
+import { CurrentUser, User } from '../interfaces';
 import { LocalStorageService } from '../local-storage.service';
 import { AppState } from '../state/app.state';
+import { currentUserSelector } from '../state/selectors';
 
 @Component({
   selector: 'app-header',
@@ -12,13 +13,11 @@ import { AppState } from '../state/app.state';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  public admin = true;
   public activeRoute: string;
-  public currentUser = this.localStorageService.getCurrentUser();
+  public currentUser: CurrentUser;
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
     private localStorageService: LocalStorageService,
     private store: Store<AppState>
   ) {
@@ -29,7 +28,11 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.select(currentUserSelector).subscribe((user) => {
+      this.currentUser = user;
+    });
+  }
 
   goToAdminPanel() {
     this.router.navigateByUrl('/admin');
@@ -53,10 +56,6 @@ export class HeaderComponent implements OnInit {
   goToLogin(): void {
     this.router.navigate(['/login']);
   }
-
-  // goToChart(): void {
-  //   this.router.navigate(['/chart']);
-  // }
 
   onHomePage(): boolean {
     return this.activeRoute === '/';

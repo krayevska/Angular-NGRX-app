@@ -29,10 +29,15 @@
     <input
       matInput
       placeholder="pat@example.com"
+      type="email"
       [formControl]="email"
       required
+      ngModel
+      email
     />
-    <mat-error *ngIf="loginError"> Login Failed </mat-error>
+    <mat-error *ngIf="email.invalid">
+      please, enter valid email address
+    </mat-error>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Enter your password</mat-label>
@@ -52,8 +57,13 @@
     >
       <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
+    <mat-error *ngIf="password.invalid">
+      please, enter valid password
+    </mat-error>
   </mat-form-field>
-  <div class="error-wrapper" *ngIf="loginError">Login Failed</div>
+  <div class="error-wrapper" *ngIf="loginError">
+    email or password is incorrect
+  </div>
 
   <button mat-raised-button (click)="onSubmit()" class="login-button">
     Login
