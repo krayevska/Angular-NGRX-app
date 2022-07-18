@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as Chart from 'chart.js';
 import { Report } from '../interfaces';
@@ -12,20 +12,12 @@ import { assessmentReportSelector } from '../state/selectors';
 })
 export class ChartComponent implements OnInit {
   private myChart: Chart;
-  private report: Report;
+  //private report: Report;
+  @Input() report: Report;
 
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.store.pipe(select(assessmentReportSelector)).subscribe((report) => {
-      if (report) {
-        this.report = report;
-        this.getChart();
-      }
-    });
-  }
-
-  getChart(): void {
     let canvas = document.getElementById('myChart') as HTMLCanvasElement;
     let ctx = canvas.getContext('2d');
     this.myChart = new Chart(ctx, {

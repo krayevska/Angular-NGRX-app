@@ -7,6 +7,7 @@ import {
   getCurrentUserSuccess,
   getAssestmentReportSuccess,
   getCurrentUserFailure,
+  getAssestmentReport,
 } from './user.actions';
 import { AppState } from './app.state';
 
@@ -58,6 +59,13 @@ export const dataReducer = createReducer(
     return {
       ...state,
       users: action.payload,
+    };
+  }),
+
+  on(getAssestmentReport, (state, action) => {
+    return {
+      ...state,
+      report: null,
     };
   }),
 

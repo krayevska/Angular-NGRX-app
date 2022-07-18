@@ -66,6 +66,9 @@ export class DashboardComponent implements OnInit {
     this.store.pipe(select(assessmentsSelector)).subscribe((assessments) => {
       this.userAssessments = assessments;
     });
+    this.store.pipe(select(assessmentReportSelector)).subscribe((report) => {
+      this.report = report;
+    });
   }
 
   getReport(id: number): void {
@@ -74,8 +77,8 @@ export class DashboardComponent implements OnInit {
       payload: { id },
     });
 
-    this.store.pipe(select(assessmentReportSelector)).subscribe((report) => {
-      this.report = report;
-    });
+    // this.store.pipe(select(assessmentReportSelector)).subscribe((report) => {
+    //   this.report = report;
+    // });
   }
 }

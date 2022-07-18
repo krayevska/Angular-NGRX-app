@@ -87,7 +87,10 @@
       >
         <!-- <app-chart [report]="report"></app-chart> -->
 
-        <app-chart *ngIf="assessment == expandedElement"></app-chart>
+        <app-chart
+          [report]="report"
+          *ngIf="assessment == expandedElement && report"
+        ></app-chart>
       </div>
     </td>
   </ng-container>
