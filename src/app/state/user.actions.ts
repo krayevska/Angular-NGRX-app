@@ -11,6 +11,10 @@ export const getCurrentUserSuccess = createAction(
   props<{ payload: CurrentUser }>()
 );
 
+export const getCurrentUserFailure = createAction(
+  '[Login Component] Get current User Failure'
+);
+
 export const resetCurrentUser = createAction(
   '[Login Component] Reset Current User'
 );
@@ -40,5 +44,3 @@ export const getAdminUsersSuccess = createAction(
   '[Admin Page] Get Admin users Success',
   props<{ payload: User[] }>()
 );
-
-export const getLoginError = createAction('[Login Page] Get login error');

@@ -2,22 +2,13 @@ import { createReducer, on } from '@ngrx/store';
 import {
   getCurrentUser,
   resetCurrentUser,
-  setAssestments,
   getAdminUsersSuccess,
   setAssestmentsSuccess,
   getCurrentUserSuccess,
   getAssestmentReportSuccess,
-  getLoginError,
+  getCurrentUserFailure,
 } from './user.actions';
-import { Assessment, CurrentUser } from '../interfaces';
 import { AppState } from './app.state';
-import { state } from '@angular/animations';
-
-//export const initialState: User | null = null;
-// export interface AppState {
-//   user: User;
-//   assessments: Assessment;
-// }
 
 export const initialState: AppState = {
   currentUser: null,
@@ -40,6 +31,14 @@ export const dataReducer = createReducer(
     currentUser: action.payload,
     loading: null,
   })),
+
+  on(getCurrentUserFailure, (state, action) => {
+    return {
+      ...state,
+      loginError: true,
+      loading: null,
+    };
+  }),
 
   on(resetCurrentUser, (state) => {
     return {
@@ -66,14 +65,6 @@ export const dataReducer = createReducer(
     return {
       ...state,
       report: action.payload,
-    };
-  }),
-
-  on(getLoginError, (state, action) => {
-    return {
-      ...state,
-      loginError: true,
-      loading: null,
     };
   })
 );

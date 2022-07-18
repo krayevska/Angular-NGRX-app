@@ -31,7 +31,7 @@ export class CurrentUserEffect {
               };
             }),
             catchError((error): Observable<any> => {
-              return of({ type: '[Login Page] Get login error' });
+              return of({ type: '[Login Component] Get current User Failure' });
             })
           );
       })
