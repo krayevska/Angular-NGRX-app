@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import {
   getCurrentUser,
   resetCurrentUser,
-  getAdminUsersSuccess,
+  getUsersSuccess as getUsersSuccess,
   setAssestmentsSuccess,
   getCurrentUserSuccess,
   getAssestmentReportSuccess,
@@ -32,7 +32,6 @@ export const dataReducer = createReducer(
     currentUser: action.payload,
     loading: null,
   })),
-
   on(getCurrentUserFailure, (state, action) => {
     return {
       ...state,
@@ -51,11 +50,13 @@ export const dataReducer = createReducer(
       loginError: null,
     };
   }),
+
   on(setAssestmentsSuccess, (state, action) => ({
     ...state,
     assessments: action.payload,
   })),
-  on(getAdminUsersSuccess, (state, action) => {
+
+  on(getUsersSuccess, (state, action) => {
     return {
       ...state,
       users: action.payload,
@@ -68,7 +69,6 @@ export const dataReducer = createReducer(
       report: null,
     };
   }),
-
   on(getAssestmentReportSuccess, (state, action) => {
     return {
       ...state,

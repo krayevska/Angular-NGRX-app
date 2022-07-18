@@ -45,11 +45,11 @@ export class UsersEffect {
 
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
-      ofType('[Admin Page] Get Admin users'),
+      ofType('[Admin Page] Get users'),
       mergeMap(() =>
         this.dataService.getAllUsers().pipe(
           map((users) => ({
-            type: '[Admin Page] Get Admin users Success',
+            type: '[Admin Page] Get users Success',
             payload: users,
           })),
           catchError(() => EMPTY)

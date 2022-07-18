@@ -19,7 +19,11 @@
   <ng-container matColumnDef="csv">
     <th mat-header-cell *matHeaderCellDef>Get data in CSV</th>
     <td mat-cell *matCellDef="let user">
-      <button (click)="getCsv(user)">Get CSV</button>
+      <div class="button-container">
+        <button mat-raised-button (click)="getCsv(user)">
+          Download in CSV
+        </button>
+      </div>
     </td>
   </ng-container>
 

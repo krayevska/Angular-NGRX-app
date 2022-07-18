@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.store.dispatch({ type: '[Admin Page] Get Admin users' });
+    this.store.dispatch({ type: '[Admin Page] Get users' });
     this.store.pipe(select(usersSelector)).subscribe((users: any) => {
       this.users = users;
       console.log('THIS USERS ', this.users);
@@ -31,13 +31,9 @@ export class AdminComponent implements OnInit {
   }
 
   getCsv(user): void {
-    console.log('USER ', user);
-    let userStr = JSON.stringify(user);
-    console.log('USER STRING ', userStr);
-    const data: Blob = new Blob([userStr], {
-      type: 'text/csv;charset=utf-8',
+    const data: Blob = new Blob([JSON.stringify(user)], {
+      type: 'text/plain',
     });
-    console.log('DATA BLOB ', data);
     saveAs(data, 'user.csv');
   }
 }

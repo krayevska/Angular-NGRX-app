@@ -38,9 +38,9 @@ export const setAssestmentsSuccess = createAction(
   props<{ payload: Assessment[] }>()
 );
 
-export const getAdminUsers = createAction('[Admin Page] Get Admin users');
+export const getUsers = createAction('[Admin Page] Get users');
 
-export const getAdminUsersSuccess = createAction(
-  '[Admin Page] Get Admin users Success',
+export const getUsersSuccess = createAction(
+  '[Admin Page] Get users Success',
   props<{ payload: User[] }>()
 );
