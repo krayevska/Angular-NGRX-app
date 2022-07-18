@@ -40,3 +40,5 @@ export const getAdminUsersSuccess = createAction(
   '[Admin Page] Get Admin users Success',
   props<{ payload: User[] }>()
 );
+
+export const getLoginError = createAction('[Login Page] Get login error');

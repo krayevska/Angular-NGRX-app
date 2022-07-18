@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 import { DataService } from '../data.service';
-import { Assessment } from '../interfaces';
+import { Assessment, Report } from '../interfaces';
 import { Observable } from 'rxjs';
 import { CurrentUser } from '../interfaces';
 import { select, Store } from '@ngrx/store';
@@ -15,7 +15,10 @@ import {
   trigger,
 } from '@angular/animations';
 import { AppState } from '../state/app.state';
-import { assessmentsSelector } from '../state/selectors';
+import {
+  assessmentsSelector,
+  assessmentReportSelector,
+} from '../state/selectors';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -47,10 +50,12 @@ export class DashboardComponent implements OnInit {
     'expand',
   ];
   public expandedElement: Assessment | null;
+  public report: Report;
 
   constructor(
     private dataService: DataService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -64,16 +69,13 @@ export class DashboardComponent implements OnInit {
   }
 
   getReport(id: number): void {
-    console.log('GET REPORT ', id);
     this.store.dispatch({
       type: '[Dashboard Component] Get Assestment Report',
       payload: { id },
     });
 
-    //this.dataService.getUserAssessmentsReport(id).subscribe((report) => {});
-  }
-
-  getAllUsers() {
-    this.dataService.getAllUsers().subscribe((users) => {});
+    this.store.pipe(select(assessmentReportSelector)).subscribe((report) => {
+      this.report = report;
+    });
   }
 }

@@ -32,6 +32,8 @@ import {
 } from './state/user.effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ChartComponent } from './chart/chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     HeaderComponent,
     AdminComponent,
     AboutComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatDividerModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    ChartsModule,
     StoreModule.forRoot({
       data: dataReducer,
     }),

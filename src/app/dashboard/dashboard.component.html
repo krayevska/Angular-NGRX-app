@@ -85,7 +85,9 @@
           assessment == expandedElement ? 'expanded' : 'collapsed'
         "
       >
-        <canvas id="chart" width="200" height="200"></canvas>
+        <!-- <app-chart [report]="report"></app-chart> -->
+
+        <app-chart *ngIf="assessment == expandedElement"></app-chart>
       </div>
     </td>
   </ng-container>
@@ -120,4 +122,7 @@
     </tr>
   </table>
 </div>
-</div> -->
+</div>
+
+
+-->

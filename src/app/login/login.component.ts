@@ -6,6 +6,8 @@ import {
   FormControl,
   FormGroup,
   Validators,
+  FormGroupDirective,
+  NgForm,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
@@ -15,8 +17,14 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { DataService } from '../data.service';
 import { setAssestments, getCurrentUser } from '../state/user.actions';
-import { currentUserSelector, loadingtSelector } from '../state/selectors';
+import {
+  currentUserSelector,
+  errorSelector,
+  fetchError,
+  loadingtSelector,
+} from '../state/selectors';
 import { AppState } from '../state/app.state';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +38,7 @@ export class LoginComponent implements OnInit {
   email: AbstractControl;
   password: AbstractControl;
   hide = true;
+  loginError: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +51,8 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
-
+    //@ts-ignore
+    window.l = this.loginForm;
     this.email = this.loginForm.get('email');
     this.password = this.loginForm.get('password');
 
@@ -54,6 +64,10 @@ export class LoginComponent implements OnInit {
 
     this.store.select(loadingtSelector).subscribe((loading) => {
       this.loading = loading;
+    });
+
+    this.store.select(errorSelector).subscribe((loginError) => {
+      this.loginError = loginError;
     });
   }
 

@@ -26,8 +26,13 @@ export function fetchLoading(state: any): boolean {
   return state.loading;
 }
 
+export function fetchError(state: any): boolean {
+  return state.loginError;
+}
+
 export const currentUserSelector = createSelector(getState, fetchCurrentUser);
 export const assessmentsSelector = createSelector(getState, fetchAssestments);
 export const usersSelector = createSelector(getState, fetchUsers);
 export const assessmentReportSelector = createSelector(getState, fetchReport);
 export const loadingtSelector = createSelector(getState, fetchLoading);
+export const errorSelector = createSelector(getState, fetchError);

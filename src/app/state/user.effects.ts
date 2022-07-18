@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { EMPTY } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 import { DataService } from '../data.service';
@@ -30,7 +30,9 @@ export class CurrentUserEffect {
                 payload: user,
               };
             }),
-            catchError(() => EMPTY)
+            catchError((error): Observable<any> => {
+              return of({ type: '[Login Page] Get login error' });
+            })
           );
       })
     )

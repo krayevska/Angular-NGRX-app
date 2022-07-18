@@ -54,6 +54,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  // goToChart(): void {
+  //   this.router.navigate(['/chart']);
+  // }
+
   onHomePage(): boolean {
     return this.activeRoute === '/';
   }

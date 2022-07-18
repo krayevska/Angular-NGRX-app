@@ -6,4 +6,5 @@ export interface AppState {
   users: User[];
   report: Report;
   loading: boolean;
+  loginError: boolean;
 }
