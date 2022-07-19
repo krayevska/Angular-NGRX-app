@@ -1,15 +1,16 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Assessment, Report } from './interfaces';
-import { User } from './interfaces';
+import { Assessment, Report } from '../models/interfaces';
+import { User } from '../models/interfaces';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
   constructor(private http: HttpClient) {}
-  private apiUrl = 'https://ds-test-api.herokuapp.com';
+  private apiUrl = environment.baseUrl;
 
   getUserAssessments(): Observable<Assessment[]> {
     return this.http.get<Assessment[]>(`${this.apiUrl}/api/userassessments`);

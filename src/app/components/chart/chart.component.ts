@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import * as Chart from 'chart.js';
-import { Report } from '../interfaces';
+import { Report } from '../../models/interfaces';
 
 @Component({
   selector: 'app-chart',

@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { Assessment, CurrentUser, Report, User } from '../interfaces';
+import { Assessment, CurrentUser, Report, User } from '../models/interfaces';
 import { AppState } from './app.state';
 
 export function getState(state: any): AppState {

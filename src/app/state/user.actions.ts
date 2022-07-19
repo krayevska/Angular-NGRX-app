@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User, Assessment, CurrentUser, Report } from '../interfaces';
+import { User, Assessment, CurrentUser, Report } from '../models/interfaces';
 
 export const getCurrentUser = createAction(
   '[Login Component] Get current User',

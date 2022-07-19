@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, Observable, of } from 'rxjs';
 import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
-import { AuthenticationService } from '../authentication.service';
-import { DataService } from '../data.service';
-import { LoginAction, ReportAction } from '../interfaces';
-import { LocalStorageService } from '../local-storage.service';
+import { AuthenticationService } from '../services/authentication.service';
+import { DataService } from '../services/data.service';
+import { LoginAction, ReportAction } from '../models/interfaces';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Injectable()
 export class CurrentUserEffect {

@@ -11,8 +11,8 @@ import {
   currentUserSelector,
   errorSelector,
   loadingtSelector,
-} from '../state/selectors';
-import { AppState } from '../state/app.state';
+} from '../../state/selectors';
+import { AppState } from '../../state/app.state';
 
 @Component({
   selector: 'app-login',

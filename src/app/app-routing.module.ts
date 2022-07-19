@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from './about/about.component';
-import { AdminGuard } from './admin.guard';
-import { AdminComponent } from './admin/admin.component';
-import { AuthGuard } from './auth.guard';
-import { ChartComponent } from './chart/chart.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginComponent } from './login/login.component';
+import { AboutComponent } from './components/about/about.component';
+import { AdminGuard } from './guards/admin.guard';
+import { AdminComponent } from './components/admin/admin.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ChartComponent } from './components/chart/chart.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },

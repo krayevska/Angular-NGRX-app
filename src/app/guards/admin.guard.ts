@@ -6,11 +6,8 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AuthenticationService } from './authentication.service';
-import { CurrentUser } from './interfaces';
-import { LocalStorageService } from './local-storage.service';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Injectable({
   providedIn: 'root',

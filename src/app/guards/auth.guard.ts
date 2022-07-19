@@ -7,10 +7,7 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthenticationService } from './authentication.service';
-import { CurrentUser } from './interfaces';
-import { Store } from '@ngrx/store';
-import { LocalStorageService } from './local-storage.service';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Injectable({
   providedIn: 'root',

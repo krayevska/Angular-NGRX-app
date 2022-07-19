@@ -1,4 +1,4 @@
-import { User, Assessment, CurrentUser, Report } from '../interfaces';
+import { User, Assessment, CurrentUser, Report } from '../models/interfaces';
 
 export interface AppState {
   currentUser: CurrentUser;

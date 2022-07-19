@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Assessment, Report } from '../interfaces';
+import { Assessment, Report, CurrentUser } from '../../models/interfaces';
 import { Observable } from 'rxjs';
-import { CurrentUser } from '../interfaces';
 import { select, Store } from '@ngrx/store';
 import {
   animate,
@@ -10,11 +9,11 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { AppState } from '../state/app.state';
+import { AppState } from '../../state/app.state';
 import {
   assessmentsSelector,
   assessmentReportSelector,
-} from '../state/selectors';
+} from '../../state/selectors';
 
 @Component({
   selector: 'app-dashboard',
