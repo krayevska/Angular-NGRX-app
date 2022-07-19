@@ -5,8 +5,9 @@ import { AppState } from '../../state/app.state';
 import { usersSelector } from '../../state/selectors';
 import { saveAs } from 'file-saver';
 import { Observable } from 'rxjs';
-import { DISPLAYED_COLUMNS } from '../../models/constatns';
+import { DISPLAYED_COLUMNS_ADMIN } from '../../models/constatns';
 import * as actions from 'src/app/state/user.actions';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin',
@@ -14,8 +15,12 @@ import * as actions from 'src/app/state/user.actions';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  users$: Observable<User[]> = this.store.select(usersSelector);
-  public displayedColumns = DISPLAYED_COLUMNS;
+  private allUsers: User[];
+  public displayedColumns = DISPLAYED_COLUMNS_ADMIN;
+
+  users$: Observable<User[]> = this.store
+    .select(usersSelector)
+    .pipe(tap((users) => (this.allUsers = users)));
 
   constructor(private store: Store<AppState>) {}
 
@@ -23,10 +28,10 @@ export class AdminComponent implements OnInit {
     this.store.dispatch(actions.getUsers());
   }
 
-  getCsv(user): void {
-    const data: Blob = new Blob([JSON.stringify(user)], {
+  getCsv(data: User | User[]): void {
+    const dataToSave: Blob = new Blob([JSON.stringify(data)], {
       type: 'text/plain',
     });
-    saveAs(data, 'user.csv');
+    saveAs(dataToSave, 'data.csv');
   }
 }

@@ -36,14 +36,14 @@
       please, enter valid password
     </mat-error>
   </mat-form-field>
-  <div class="error-wrapper" *ngIf="loginError">
+  <div class="error-wrapper" *ngIf="loginError$ | async">
     email or password is incorrect
   </div>
 
   <button mat-raised-button (click)="onSubmit()" class="login-button">
     Login
   </button>
-  <div *ngIf="loading" class="loader-wrap">
+  <div *ngIf="loading$ | async" class="loader-wrap">
     <mat-progress-bar mode="buffer"></mat-progress-bar>
   </div>
 </div>

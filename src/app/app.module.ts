@@ -24,12 +24,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import {
-  CurrentUserEffect,
-  ReportEffect,
-  UserAssestmentsEffect,
-  UsersEffect,
-} from './state/user.effects';
+import { AppEffect } from './state/user.effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ChartComponent } from './components/chart/chart.component';
@@ -66,12 +61,7 @@ import { ChartsModule } from 'ng2-charts';
       data: dataReducer,
     }),
     StoreDevtoolsModule.instrument({ maxAge: 100 }),
-    EffectsModule.forRoot([
-      UsersEffect,
-      UserAssestmentsEffect,
-      CurrentUserEffect,
-      ReportEffect,
-    ]),
+    EffectsModule.forRoot([AppEffect]),
   ],
   providers: [
     {

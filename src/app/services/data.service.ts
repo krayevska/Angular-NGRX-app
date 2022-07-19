@@ -18,7 +18,7 @@ export class DataService {
 
   getUserAssessmentsReport(idObject: any): Observable<Report> {
     let queryParams = new HttpParams();
-    queryParams = queryParams.append('id', idObject.id);
+    queryParams = queryParams.append('id', idObject);
 
     let url = `${this.apiUrl}/api/userassessment/graph`;
 

@@ -56,16 +56,16 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  isAdmin(): boolean {
+    return this.currentUser.role === 'Admin';
+  }
+
   onHomePage(): boolean {
     return this.activeRoute === '/';
   }
 
   onAdminPage(): boolean {
     return this.activeRoute === '/admin';
-  }
-
-  isAdmin(): boolean {
-    return this.currentUser.role === 'Admin';
   }
 
   notOnLoginPage(): boolean {

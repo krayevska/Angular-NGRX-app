@@ -3,7 +3,7 @@ import {
   getCurrentUser,
   resetCurrentUser,
   getUsersSuccess as getUsersSuccess,
-  setAssestmentsSuccess,
+  getAssestmentsSuccess,
   getCurrentUserSuccess,
   getAssestmentReportSuccess,
   getCurrentUserFailure,
@@ -51,7 +51,7 @@ export const dataReducer = createReducer(
     };
   }),
 
-  on(setAssestmentsSuccess, (state, action) => ({
+  on(getAssestmentsSuccess, (state, action) => ({
     ...state,
     assessments: action.payload,
   })),

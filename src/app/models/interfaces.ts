@@ -34,11 +34,17 @@ export interface Report {
 
 export interface LoginAction extends Action {
   type: string;
-  payload: {
-    email: any;
-    password: any;
-  };
+  email: any;
+  password: any;
 }
+
+// export interface LoginAction extends Action {
+//   type: string;
+//   payload: {
+//     email: any;
+//     password: any;
+//   };
+// }
 
 export interface ReportAction extends Action {
   type: string;

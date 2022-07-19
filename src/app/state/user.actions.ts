@@ -29,11 +29,11 @@ export const getAssestmentReportSuccess = createAction(
   props<{ payload: Report }>()
 );
 
-export const setAssestments = createAction(
+export const getAssestments = createAction(
   '[Dashboard Component] Get Assestments'
 );
 
-export const setAssestmentsSuccess = createAction(
+export const getAssestmentsSuccess = createAction(
   '[Dashboard Component] Get Assestments Success',
   props<{ payload: Assessment[] }>()
 );

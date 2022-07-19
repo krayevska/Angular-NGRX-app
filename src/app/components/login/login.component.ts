@@ -2,17 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { tap } from 'rxjs/operators';
+
 import {
+  assessmentReportSelector,
   currentUserSelector,
   errorSelector,
   loadingtSelector,
 } from '../../state/selectors';
 import { AppState } from '../../state/app.state';
+import * as actions from 'src/app/state/user.actions';
+import { Observable } from 'rxjs/internal/Observable';
+import { Report } from 'src/app/models/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -21,15 +28,15 @@ import { AppState } from '../../state/app.state';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loading: boolean;
   email: AbstractControl;
   password: AbstractControl;
   hide = true;
-  loginError: boolean;
+
+  loading$: Observable<boolean> = this.store.select(loadingtSelector);
+  loginError$: Observable<boolean> = this.store.select(errorSelector);
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private store: Store<AppState>
   ) {}
 
@@ -41,20 +48,6 @@ export class LoginComponent implements OnInit {
 
     this.email = this.loginForm.get('email');
     this.password = this.loginForm.get('password');
-
-    this.store.select(currentUserSelector).subscribe((user) => {
-      if (user) {
-        this.router.navigate(['']);
-      }
-    });
-
-    this.store.select(loadingtSelector).subscribe((loading) => {
-      this.loading = loading;
-    });
-
-    this.store.select(errorSelector).subscribe((loginError) => {
-      this.loginError = loginError;
-    });
   }
 
   get form() {
@@ -62,14 +55,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let email = this.form.email.value;
-    let password = this.form.password.value;
+    const email = this.form.email.value;
+    const password = this.form.password.value;
     if (this.loginForm.invalid) {
       return;
     }
-    this.store.dispatch({
-      type: '[Login Component] Get current User',
-      payload: { email, password },
-    });
+
+    this.store.dispatch(actions.getCurrentUser({ email, password }));
   }
 }

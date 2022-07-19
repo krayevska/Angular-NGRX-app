@@ -1,76 +1,78 @@
 <div class="title">
   <h3>Your assessments</h3>
 </div>
-
-<table
-  mat-table
-  [dataSource]="userAssessments"
-  multiTemplateDataRows
-  class="mat-elevation-z8"
->
-  <ng-container
-    matColumnDef="{{ column }}"
-    *ngFor="let column of displayedColumns"
+<ng-container *ngIf="assessments$ | async as assessments">
+  <table
+    mat-table
+    [dataSource]="assessments"
+    multiTemplateDataRows
+    class="mat-elevation-z8"
   >
-    <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-    <td mat-cell *matCellDef="let assessment">{{ assessment[column] }}</td>
-  </ng-container>
-  <ng-container matColumnDef="expand">
-    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
-    <td mat-cell *matCellDef="let assessment">
-      <button
-        mat-icon-button
-        aria-label="expand row"
-        (click)="
-          expandedElement = expandedElement === assessment ? null : assessment;
-          $event.stopPropagation();
-          getReport(assessment.id)
-        "
-      >
-        <mat-icon *ngIf="expandedElement !== assessment"
-          >keyboard_arrow_down</mat-icon
-        >
-        <mat-icon *ngIf="expandedElement === assessment"
-          >keyboard_arrow_up</mat-icon
-        >
-      </button>
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="expandedDetail">
-    <td
-      mat-cell
-      *matCellDef="let assessment"
-      [attr.colspan]="displayedColumnsWithExpand.length"
+    <ng-container
+      matColumnDef="{{ column }}"
+      *ngFor="let column of displayedColumns"
     >
-      <div
-        class="example-element-detail"
-        [@detailExpand]="
-          assessment == expandedElement ? 'expanded' : 'collapsed'
-        "
-      >
-        <app-chart
-          [report]="report"
-          *ngIf="assessment == expandedElement && report"
-        ></app-chart>
-      </div>
-    </td>
-  </ng-container>
+      <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+      <td mat-cell *matCellDef="let assessment">{{ assessment[column] }}</td>
+    </ng-container>
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let assessment">
+        <button
+          mat-icon-button
+          aria-label="expand row"
+          (click)="
+            expandedElement =
+              expandedElement === assessment ? null : assessment;
+            $event.stopPropagation();
+            getReport(assessment.id)
+          "
+        >
+          <mat-icon *ngIf="expandedElement !== assessment"
+            >keyboard_arrow_down</mat-icon
+          >
+          <mat-icon *ngIf="expandedElement === assessment"
+            >keyboard_arrow_up</mat-icon
+          >
+        </button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumnsWithExpand"></tr>
-  <tr
-    mat-row
-    *matRowDef="let assessment; columns: displayedColumnsWithExpand"
-    class="example-element-row"
-    [class.example-expanded-row]="expandedElement === assessment"
-    (click)="
-      expandedElement = expandedElement === assessment ? null : assessment;
-      getReport(assessment.id)
-    "
-  ></tr>
-  <tr
-    mat-row
-    *matRowDef="let row; columns: ['expandedDetail']"
-    class="example-detail-row"
-  ></tr>
-</table>
+    <ng-container matColumnDef="expandedDetail">
+      <td
+        mat-cell
+        *matCellDef="let assessment"
+        [attr.colspan]="displayedColumnsWithExpand.length"
+      >
+        <div
+          class="example-element-detail"
+          [@detailExpand]="
+            assessment == expandedElement ? 'expanded' : 'collapsed'
+          "
+        >
+          <app-chart
+            [report]="report$ | async"
+            *ngIf="assessment == expandedElement && (report$ | async)"
+          ></app-chart>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsWithExpand"></tr>
+    <tr
+      mat-row
+      *matRowDef="let assessment; columns: displayedColumnsWithExpand"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === assessment"
+      (click)="
+        expandedElement = expandedElement === assessment ? null : assessment;
+        getReport(assessment.id)
+      "
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: ['expandedDetail']"
+      class="example-detail-row"
+    ></tr>
+  </table>
+</ng-container>
