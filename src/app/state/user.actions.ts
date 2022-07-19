@@ -30,11 +30,11 @@ export const getAssestmentReportSuccess = createAction(
 );
 
 export const setAssestments = createAction(
-  '[Dashboard Component] Set Assestments'
+  '[Dashboard Component] Get Assestments'
 );
 
 export const setAssestmentsSuccess = createAction(
-  '[Dashboard Component] Set Assestments Success',
+  '[Dashboard Component] Get Assestments Success',
   props<{ payload: Assessment[] }>()
 );
 

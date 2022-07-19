@@ -2,29 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  ReactiveFormsModule,
-  FormControl,
   FormGroup,
   Validators,
-  FormGroupDirective,
-  NgForm,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../authentication.service';
-import { CurrentUser } from '../interfaces';
-import { take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { DataService } from '../data.service';
-import { setAssestments, getCurrentUser } from '../state/user.actions';
 import {
   currentUserSelector,
   errorSelector,
-  fetchError,
   loadingtSelector,
 } from '../state/selectors';
 import { AppState } from '../state/app.state';
-import { ErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +22,6 @@ import { ErrorStateMatcher } from '@angular/material/core';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading: boolean;
-  submitted = false;
   email: AbstractControl;
   password: AbstractControl;
   hide = true;
@@ -51,8 +38,7 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
-    //@ts-ignore
-    window.l = this.loginForm;
+
     this.email = this.loginForm.get('email');
     this.password = this.loginForm.get('password');
 
@@ -78,11 +64,9 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     let email = this.form.email.value;
     let password = this.form.password.value;
-    this.submitted = true;
     if (this.loginForm.invalid) {
       return;
     }
-
     this.store.dispatch({
       type: '[Login Component] Get current User',
       payload: { email, password },

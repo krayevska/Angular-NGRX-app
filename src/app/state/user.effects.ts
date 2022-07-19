@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
 import { EMPTY, Observable, of } from 'rxjs';
 import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 import { DataService } from '../data.service';
-import { CustomAction, ReportAction } from '../interfaces';
+import { LoginAction, ReportAction } from '../interfaces';
 import { LocalStorageService } from '../local-storage.service';
 
 @Injectable()
@@ -19,7 +18,7 @@ export class CurrentUserEffect {
   loadUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType('[Login Component] Get current User'),
-      switchMap((action: CustomAction) => {
+      switchMap((action: LoginAction) => {
         return this.authService
           .login(action.payload.email, action.payload.password)
           .pipe(
@@ -65,11 +64,11 @@ export class UserAssestmentsEffect {
 
   loadAssestments$ = createEffect(() =>
     this.actions$.pipe(
-      ofType('[Dashboard Component] Set Assestments'),
+      ofType('[Dashboard Component] Get Assestments'),
       mergeMap(() =>
         this.dataService.getUserAssessments().pipe(
           map((assessments) => ({
-            type: '[Dashboard Component] Set Assestments Success',
+            type: '[Dashboard Component] Get Assestments Success',
             payload: assessments,
           })),
           catchError(() => EMPTY)

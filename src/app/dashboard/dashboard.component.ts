@@ -1,8 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
-import { AuthenticationService } from '../authentication.service';
-import { DataService } from '../data.service';
+import { Component, OnInit } from '@angular/core';
 import { Assessment, Report } from '../interfaces';
 import { Observable } from 'rxjs';
 import { CurrentUser } from '../interfaces';
@@ -19,7 +15,6 @@ import {
   assessmentsSelector,
   assessmentReportSelector,
 } from '../state/selectors';
-import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-dashboard',
@@ -52,15 +47,11 @@ export class DashboardComponent implements OnInit {
   public expandedElement: Assessment | null;
   public report: Report;
 
-  constructor(
-    private dataService: DataService,
-    private store: Store<AppState>,
-    private router: Router
-  ) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.store.dispatch({
-      type: '[Dashboard Component] Set Assestments',
+      type: '[Dashboard Component] Get Assestments',
     });
 
     this.store.pipe(select(assessmentsSelector)).subscribe((assessments) => {
@@ -76,9 +67,5 @@ export class DashboardComponent implements OnInit {
       type: '[Dashboard Component] Get Assestment Report',
       payload: { id },
     });
-
-    // this.store.pipe(select(assessmentReportSelector)).subscribe((report) => {
-    //   this.report = report;
-    // });
   }
 }

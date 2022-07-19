@@ -1,9 +1,6 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import * as Chart from 'chart.js';
 import { Report } from '../interfaces';
-import { AppState } from '../state/app.state';
-import { assessmentReportSelector } from '../state/selectors';
 
 @Component({
   selector: 'app-chart',
@@ -12,15 +9,21 @@ import { assessmentReportSelector } from '../state/selectors';
 })
 export class ChartComponent implements OnInit {
   private myChart: Chart;
-  //private report: Report;
   @Input() report: Report;
+  private canvasRef: any;
+  @ViewChild('canvas')
+  canvas: ElementRef<HTMLCanvasElement>;
 
-  constructor(private store: Store<AppState>) {}
+  constructor() {}
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    let canvas = document.getElementById('myChart') as HTMLCanvasElement;
-    let ctx = canvas.getContext('2d');
-    this.myChart = new Chart(ctx, {
+  ngAfterViewInit(): void {
+    this.canvasRef = this.canvas.nativeElement.getContext('2d');
+    this.getChart(this.canvasRef);
+  }
+
+  getChart(canvasRef: any): void {
+    this.myChart = new Chart(canvasRef, {
       type: 'bar',
       data: {
         labels: ['Agreeableness', 'Drive', 'Luck', 'Openess'],

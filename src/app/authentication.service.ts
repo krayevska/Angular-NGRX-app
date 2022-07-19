@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpBackend, HttpClient, HttpRequest } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { CurrentUser } from './interfaces';
-import { Store } from '@ngrx/store';
-import { getCurrentUser, resetCurrentUser } from './state/user.actions';
 
 @Injectable({
   providedIn: 'root',

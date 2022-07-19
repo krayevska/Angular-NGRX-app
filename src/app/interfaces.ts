@@ -32,7 +32,7 @@ export interface Report {
   type: string;
 }
 
-export interface CustomAction extends Action {
+export interface LoginAction extends Action {
   type: string;
   payload: {
     email: any;

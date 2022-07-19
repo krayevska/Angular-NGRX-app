@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AuthenticationService } from '../authentication.service';
 import { CurrentUser, User } from '../interfaces';
 import { LocalStorageService } from '../local-storage.service';
 import { AppState } from '../state/app.state';

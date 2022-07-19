@@ -26,7 +26,6 @@ export class AdminComponent implements OnInit {
     this.store.dispatch({ type: '[Admin Page] Get users' });
     this.store.pipe(select(usersSelector)).subscribe((users: any) => {
       this.users = users;
-      console.log('THIS USERS ', this.users);
     });
   }
 

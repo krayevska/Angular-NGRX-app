@@ -1,11 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Assessment, Report, CurrentUser } from './interfaces';
-import { Store } from '@ngrx/store';
+import { Assessment, Report } from './interfaces';
 import { User } from './interfaces';
-import { setAssestments } from './state/user.actions';
 
 @Injectable({
   providedIn: 'root',

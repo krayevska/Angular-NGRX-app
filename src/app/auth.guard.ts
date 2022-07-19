@@ -18,14 +18,8 @@ import { LocalStorageService } from './local-storage.service';
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private localStorageService: LocalStorageService,
-    private store: Store<{ user: CurrentUser[] }>
-  ) {
-    this.user$ = store.select('user');
-  }
-
-  user$: Observable<CurrentUser[]>;
+    private localStorageService: LocalStorageService
+  ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,

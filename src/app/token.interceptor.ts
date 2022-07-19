@@ -13,7 +13,6 @@ import { LocalStorageService } from './local-storage.service';
 export class TokenInterceptor implements HttpInterceptor {
   private AUTH_HEADER = 'X-Token';
   private token: string;
-  user$: Observable<CurrentUser[]>;
 
   constructor(private localStorageService: LocalStorageService) {}
 
