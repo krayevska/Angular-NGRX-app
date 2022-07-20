@@ -6,12 +6,7 @@ import {
   trigger,
 } from '@angular/animations';
 
-export const DISPLAYED_COLUMNS_ADMIN = [
-  'first_name',
-  'last-name',
-  'email',
-  'csv',
-];
+export const DISPLAYED_COLUMNS_ADMIN = ['first_name', 'last-name', 'email'];
 
 export const DISPLAYED_COLUMNS_DASHBOARD = [
   'id',
@@ -30,3 +25,6 @@ export const ANIMATION_CONFIGS = [
     ),
   ]),
 ];
+
+export const CSV_HEADINGS = ['first_name', 'last_name', 'email', 'groups'];
+export const CHART_COLORS = ['red', 'blue', 'orange', 'green'];

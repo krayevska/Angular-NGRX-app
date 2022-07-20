@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { CurrentUser, User } from '../../models/interfaces';
+
 import { LocalStorageService } from '../../services/local-storage.service';
 import { AppState } from '../../state/app.state';
-import { currentUserSelector } from '../../state/selectors';
 import * as actions from '../../state/user.actions';
 
 @Component({

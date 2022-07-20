@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { Assessment, Report, CurrentUser } from '../../models/interfaces';
+import { Assessment, Report } from '../../models/interfaces';
 import { AppState } from '../../state/app.state';
 import {
   assessmentsSelector,

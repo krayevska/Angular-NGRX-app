@@ -8,10 +8,10 @@ export interface CurrentUser {
 }
 
 export interface User {
-  email: string;
   first_name: string;
-  groups: string[];
   last_name: string;
+  email: string;
+  groups: string[];
 }
 
 export interface Assessment {
@@ -37,14 +37,6 @@ export interface LoginAction extends Action {
   email: any;
   password: any;
 }
-
-// export interface LoginAction extends Action {
-//   type: string;
-//   payload: {
-//     email: any;
-//     password: any;
-//   };
-// }
 
 export interface ReportAction extends Action {
   type: string;
