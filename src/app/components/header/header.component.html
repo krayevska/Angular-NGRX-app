@@ -1,5 +1,29 @@
 <div class="header-wrapper">
   <div class="buttons-container">
+    <div class="button-container" *ngIf="!onAboutPage">
+      <button mat-raised-button (click)="goToAboutPage()">About</button>
+    </div>
+    <div class="button-container" *ngIf="notOnLoginPage && isUserLogedIn()">
+      <button mat-raised-button (click)="logout()">Log out</button>
+    </div>
+    <div class="button-container" *ngIf="onAboutPage && !isUserLogedIn()">
+      <button mat-raised-button (click)="goToLogin()">Log in</button>
+    </div>
+
+    <div
+      class="button-container"
+      *ngIf="isUserLogedIn() && isAdmin() && !onAdminPage"
+    >
+      <button mat-raised-button (click)="goToAdminPanel()">Admin panel</button>
+    </div>
+    <div class="button-container" *ngIf="isUserLogedIn() && !onDashboard">
+      <button mat-raised-button (click)="goToDashboard()">Dashboard</button>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="header-wrapper">
+  <div class="buttons-container">
     <div class="button-container" *ngIf="!onAboutPage()">
       <button mat-raised-button (click)="goToAboutPage()">About</button>
     </div>
@@ -9,9 +33,6 @@
     <div class="button-container" *ngIf="onAboutPage() && !userLogedIn()">
       <button mat-raised-button (click)="goToLogin()">Log in</button>
     </div>
-    <!-- <div class="button-container">
-      <button mat-raised-button (click)="goToChart()">CHART</button>
-    </div> -->
 
     <div
       class="button-container"
@@ -19,8 +40,8 @@
     >
       <button mat-raised-button (click)="goToAdminPanel()">Admin panel</button>
     </div>
-    <div class="button-container" *ngIf="userLogedIn() && !onHomePage()">
+    <div class="button-container" *ngIf="userLogedIn() && !onDashboard()">
       <button mat-raised-button (click)="goToDashboard()">Dashboard</button>
     </div>
   </div>
-</div>
+</div> -->

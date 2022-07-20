@@ -2,24 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs/operators';
 
-import {
-  assessmentReportSelector,
-  currentUserSelector,
-  errorSelector,
-  loadingtSelector,
-} from '../../state/selectors';
+import { errorSelector, loadingtSelector } from '../../state/selectors';
 import { AppState } from '../../state/app.state';
 import * as actions from 'src/app/state/user.actions';
 import { Observable } from 'rxjs/internal/Observable';
-import { Report } from 'src/app/models/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -45,9 +36,6 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
-
-    this.email = this.loginForm.get('email');
-    this.password = this.loginForm.get('password');
   }
 
   get form() {

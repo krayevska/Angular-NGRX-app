@@ -1,16 +1,16 @@
-<div class="form-container">
+<div [formGroup]="loginForm" class="form-container">
   <mat-form-field appearance="outline">
     <mat-label>Enter your email</mat-label>
     <input
       matInput
       placeholder="pat@example.com"
       type="email"
-      [formControl]="email"
+      formControlName="email"
       required
       ngModel
       email
     />
-    <mat-error *ngIf="email.invalid">
+    <mat-error *ngIf="email?.invalid">
       please, enter valid email address
     </mat-error>
   </mat-form-field>
@@ -20,7 +20,7 @@
       matInput
       placeholder="password"
       [type]="hide ? 'password' : 'text'"
-      [formControl]="password"
+      formControlName="password"
     />
     <button
       mat-icon-button
@@ -32,7 +32,7 @@
     >
       <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
-    <mat-error *ngIf="password.invalid">
+    <mat-error *ngIf="password?.invalid">
       please, enter valid password
     </mat-error>
   </mat-form-field>

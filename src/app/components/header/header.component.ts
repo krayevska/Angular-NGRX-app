@@ -5,6 +5,7 @@ import { CurrentUser, User } from '../../models/interfaces';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { AppState } from '../../state/app.state';
 import { currentUserSelector } from '../../state/selectors';
+import * as actions from '../../state/user.actions';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +13,10 @@ import { currentUserSelector } from '../../state/selectors';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  public activeRoute: string;
-  public currentUser: CurrentUser;
+  public onDashboard: boolean;
+  public onAdminPage: boolean;
+  public notOnLoginPage: boolean;
+  public onAboutPage: boolean;
 
   constructor(
     private router: Router,
@@ -22,26 +25,23 @@ export class HeaderComponent implements OnInit {
   ) {
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
-        this.activeRoute = event.url;
+        const activeRoute = event.url;
+        this.setButtonsConditionals(activeRoute);
       }
     });
   }
 
-  ngOnInit(): void {
-    this.store.select(currentUserSelector).subscribe((user) => {
-      this.currentUser = user;
-    });
+  setButtonsConditionals(route: string): void {
+    this.onDashboard = route === '/';
+    this.onAdminPage = route === '/admin';
+    this.notOnLoginPage = route !== '/login';
+    this.onAboutPage = route === '/about';
   }
+
+  ngOnInit(): void {}
 
   goToAdminPanel() {
     this.router.navigateByUrl('/admin');
-  }
-
-  logout() {
-    this.currentUser = null;
-    this.localStorageService.clearLocalStorage();
-    this.store.dispatch({ type: '[Login Component] Reset Current User' });
-    this.router.navigate(['/login']);
   }
 
   goToDashboard(): void {
@@ -56,31 +56,18 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  logout() {
+    this.localStorageService.clearLocalStorage();
+    this.store.dispatch(actions.resetCurrentUser());
+    // move to Effect?
+    this.router.navigate(['/login']);
+  }
+
   isAdmin(): boolean {
-    return this.currentUser.role === 'Admin';
+    return this.localStorageService.getCurrentUsersRole() === 'Admin';
   }
 
-  onHomePage(): boolean {
-    return this.activeRoute === '/';
-  }
-
-  onAdminPage(): boolean {
-    return this.activeRoute === '/admin';
-  }
-
-  notOnLoginPage(): boolean {
-    return this.activeRoute !== '/login';
-  }
-
-  onAboutPage(): boolean {
-    return this.activeRoute === '/about';
-  }
-
-  userLogedIn(): boolean {
-    this.currentUser = this.localStorageService.getCurrentUser();
-    if (this.currentUser) {
-      return true;
-    }
-    return false;
+  isUserLogedIn(): boolean {
+    return this.localStorageService.getCurrentUser() ? true : false;
   }
 }

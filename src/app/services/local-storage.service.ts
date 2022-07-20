@@ -15,6 +15,11 @@ export class LocalStorageService {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
 
+  getCurrentUsersRole(): string {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    return user.role;
+  }
+
   getCurrentToken(): string {
     let user = this.getCurrentUser();
     return user.token;

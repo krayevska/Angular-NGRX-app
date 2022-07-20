@@ -28,10 +28,38 @@ export class AdminComponent implements OnInit {
     this.store.dispatch(actions.getUsers());
   }
 
-  getCsv(data: User | User[]): void {
-    const dataToSave: Blob = new Blob([JSON.stringify(data)], {
-      type: 'text/plain',
+  getCsv(users: User[]): void {
+    // const csvString = users.reduce((array: any, item: any, index: any) => {
+    //   if (index === 0) {
+    //     array.push(Object.keys(item));
+    //   }
+    //   array.push(
+    //     Object.values(item).map((i) =>
+    //       Array.isArray(i) ? JSON.stringify(i) : i
+    //     )
+    //   );
+    //   return array;
+    // }, []);
+    // console.log('csvString ', csvString);
+
+    const headings = Object.keys(users[0]);
+
+    const csvString = [
+      headings,
+      ...users.map((item) => {
+        let userData = [];
+        headings.forEach((heading) => {
+          userData.push(JSON.stringify(item[heading]));
+        });
+        return userData;
+      }),
+    ]
+      .map((item) => item.join(','))
+      .join('\n');
+
+    const dataToSave: Blob = new Blob([csvString], {
+      type: 'text/csv',
     });
-    saveAs(dataToSave, 'data.csv');
+    saveAs(dataToSave, 'users.csv');
   }
 }
